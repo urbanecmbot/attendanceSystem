@@ -1,0 +1,4 @@
+functions:	.Write() // write data to db users // params id = auto name = user_name card_id = UID time = time when the card was detected  
+		.Read() // read all from users
+		.Read_UID(name) // get a card id of user nammed ...
+		.Read_time(name) 
