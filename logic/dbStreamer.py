@@ -13,7 +13,7 @@ def read(db_name):
 		print data
 
 def add_user(name, card_id):
-	conn = connect("users")
+	conn = connect("attendanceSystem")
 	cur = conn.cursor()
 	with cur:
 		#cur.execute("insert into users (id, name, card_id, time) values (NULL, 'Lukas Valec', 1342210118, '12:59:59');", plain_query=True)
