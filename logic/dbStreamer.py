@@ -1,22 +1,29 @@
 import oursql
 
-def connect():
-	conn = oursql.connect(host="localhost", user="attendanceSystem", passwd="somerandomgiberlish", db="attendanceSystem")
+def connect(db_name):
+	conn = oursql.connect(host="localhost", user="attendanceSystem", passwd="somerandomgiberlish", db=db_name)
 	return conn
 
-def read():
-	conn = connect()
+def read(db_name):
+	conn = connect(db_name)
 	cur = conn.cursor()
 	with cur:
-		cur.execute("select id, name, card_id, time from users;")
+		cur.execute("select * from" +  db_name + ";")
 		data = cur.fetchall()
 		print data
 
-def write(name, card_id, time):
-	conn = connect()
+def add_user(name, card_id):
+	conn = connect("users")
 	cur = conn.cursor()
 	with cur:
 		#cur.execute("insert into users (id, name, card_id, time) values (NULL, 'Lukas Valec', 1342210118, '12:59:59');", plain_query=True)
-		cur.execute('''insert into users (id, name, card_id, time) values (NULL, "%s", "%s", "%s");''' % (name, card_id, time), plain_query=True)
+		cur.execute('''insert into users (id, name, card_id) values (NULL, "%s", "%s");''' % (name, card_id), plain_query=True)
 
-write('test', '31313', '12:59:59')
+def save_iStream(card_id, time):
+	conn = connect("istream")
+	cur = conn.cursor()
+	with cur:	
+		cur.execute('''insert into istream (id, card_id, time) values (NULL, "%s", "%s");''' % (card_id, time), plain_query=True)
+
+#read("users")
+add_user('Lukas', '2312312')
