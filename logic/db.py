@@ -16,7 +16,7 @@ def write(name, card_id, time):
 	conn = connect()
 	cur = conn.cursor()
 	with cur:
-		cur.execute("insert into users (id, name, card_id, time) values (NULL, 'Lukas Valec', 1342210118, '12:59:59');", plain_query=True)
-		#cur.execute("insert into users (id, name, card_id, time) values (NULL, ?, ?, ?);", (name, card_id, time), plain_query=True)
+		#cur.execute("insert into users (id, name, card_id, time) values (NULL, 'Lukas Valec', 1342210118, '12:59:59');", plain_query=True)
+		cur.execute('''insert into users (id, name, card_id, time) values (NULL, "%s", "%s", "%s");''' % (name, card_id, time), plain_query=True)
 
 write('test', '31313', '12:59')
